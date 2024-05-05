@@ -6,6 +6,7 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 -- Enable true color support
 vim.opt.termguicolors = true
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -145,9 +146,18 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'rktjmp/shipwright.nvim',
   'rktjmp/lush.nvim', -- Theme development
-  { dir = '/home/rrrodzilla/Projects/nvim_themes/quasar', lazy = true, term_colors = true },
-  --  { 'rust-lang/rust.vim' },
+  {
+    'GovCraft/quasar-nvim',
+    dependencies = { 'rktjmp/lush.nvim' },
+    name = 'quasar',
+    after = 'lush',
+    priority = 1000,
+    config = function()
+      vim.cmd 'colorscheme quasar'
+    end,
+  },
   --  {
   --    'mrcjkb/rustaceanvim',
   --    version = '^3',

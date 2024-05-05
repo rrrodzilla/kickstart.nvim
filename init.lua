@@ -163,11 +163,6 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
   {
-    'puremourning/vimspector',
-    config = function() end,
-    opts = {},
-  },
-  {
     'catppuccin/nvim',
     name = 'catppuccin',
     opts = {
@@ -876,14 +871,16 @@ require('lazy').setup({
     },
   },
 })
+
 local function fetch_highlight_groups()
   local output = vim.fn.execute 'highlight'
   local lines = {}
   for line in output:gmatch '[^\r\n]+' do
-    table.insert(lines, line):
+    table.insert(lines, line)
   end
   return lines
 end
+
 local function search_highlight_groups()
   local results = fetch_highlight_groups()
   require('telescope.pickers')
@@ -903,7 +900,8 @@ local function search_highlight_groups()
     })
     :find()
 end
---vim.api.nvim_create_user_command('TelescopeHi', search_highlight_groups, {})
--- The line beneath this is called `modeline`. See `:help modeline`
 
---vim: ts=2 sts=2 sw=2 et
+vim.api.nvim_create_user_command('TelescopeHi', search_highlight_groups, {})
+
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et

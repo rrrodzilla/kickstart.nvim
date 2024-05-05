@@ -4,7 +4,8 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
-
+-- Enable true color support
+vim.opt.termguicolors = true
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -72,6 +73,7 @@ vim.opt.scrolloff = 10
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', 'vv', '<C-v>', { noremap = true, silent = true })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -144,13 +146,13 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'rktjmp/lush.nvim', -- Theme development
-  { dir = '/home/rrrodzilla/Projects/nvim_themes/quasar', lazy = true },
-  { 'rust-lang/rust.vim' },
-  {
-    'mrcjkb/rustaceanvim',
-    version = '^3',
-    ft = { 'rust' },
-  },
+  { dir = '/home/rrrodzilla/Projects/nvim_themes/quasar', lazy = true, term_colors = true },
+  --  { 'rust-lang/rust.vim' },
+  --  {
+  --    'mrcjkb/rustaceanvim',
+  --    version = '^3',
+  --    ft = { 'rust' },
+  --  },
   -- note: plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
@@ -742,13 +744,10 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'catppuccin',
+    'quasar',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      vim.cmd.colorscheme 'quasar'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
